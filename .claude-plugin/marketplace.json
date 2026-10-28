@@ -1,0 +1,16 @@
+{
+  "name": "context-pit-crew",
+  "description": "Context Pit Crew: a Claude Code mod for long sessions. See context and usage limits at a glance, and compact or hand off to a fresh session at a moment Claude has checked.",
+  "owner": {
+    "name": "anthonylim9913",
+    "url": "https://github.com/anthonylim9913"
+  },
+  "plugins": [
+    {
+      "name": "context-pit-crew",
+      "source": "./plugin",
+      "description": "Helps you run long Claude Code sessions with less lost to compaction: shows context, the 5-hour and weekly limits, an estimate of prompt-cache warmth and the API-equivalent cost above the prompt, has Claude check for a safe spot before the compactions it starts, and hands off to a fresh session with a short brief.",
+      "version": "1.1.0"
+    }
+  ]
+}

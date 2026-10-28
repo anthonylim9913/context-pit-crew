@@ -1,0 +1,74 @@
+{
+  "name": "context-pit-crew",
+  "version": "1.1.0",
+  "description": "Helps you run long Claude Code sessions with less lost to compaction: shows context, the 5-hour and weekly limits, an estimate of prompt-cache warmth and the API-equivalent cost above the prompt, has Claude check for a safe spot before the compactions it starts, and hands off to a fresh session with a short brief.",
+  "author": {
+    "name": "anthonylim9913",
+    "url": "https://github.com/anthonylim9913"
+  },
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "long-session",
+    "context",
+    "compaction",
+    "handoff",
+    "usage-limits",
+    "prompt-cache"
+  ],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "diagnostics": {
+      "type": "boolean",
+      "title": "Diagnostics",
+      "description": "Write a per-session breadcrumb file to /tmp/claude-mods-diag/ recording what the mod did and when (never text Claude wrote). For debugging only.",
+      "default": false
+    },
+    "openPaneOnStart": {
+      "type": "boolean",
+      "title": "Open the Usage pane at session start",
+      "description": "Open the Usage pane unasked when a session starts. The /pit-crew command and the meter labels open it either way.",
+      "default": false
+    },
+    "cacheTtlMinutes": {
+      "type": "number",
+      "title": "Prompt cache lifetime (minutes)",
+      "description": "How long your account's prompt cache lasts after the last request: 60 for the 1-hour cache, 5 for the 5-minute cache. Claude Code does not report it, so the Cache gauge and the going-cold warning are an estimate from this setting.",
+      "default": 60,
+      "min": 5,
+      "max": 1440
+    },
+    "contextWatch": {
+      "type": "number",
+      "title": "Context: watch line (%)",
+      "description": "Context percent where the band starts advising you to watch for a good spot. Must be below the next three.",
+      "default": 40,
+      "min": 1,
+      "max": 100
+    },
+    "contextStatePage": {
+      "type": "number",
+      "title": "Context: state page line (%)",
+      "description": "Context percent where Claude is reminded once to refresh the state page if the session keeps one. Must be above contextWatch and below contextCompact; out of order, all four use their defaults.",
+      "default": 50,
+      "min": 1,
+      "max": 100
+    },
+    "contextCompact": {
+      "type": "number",
+      "title": "Context: compact line (%)",
+      "description": "Context percent where Claude is asked once to point out the next good spot to compact, and Auto's level until you pick one from the Auto menu or with /pit-crew auto N. Must be above contextStatePage and below contextOverdue; out of order, all four use their defaults.",
+      "default": 60,
+      "min": 1,
+      "max": 100
+    },
+    "contextOverdue": {
+      "type": "number",
+      "title": "Context: overdue line (%)",
+      "description": "Context percent where compacting is overdue and Claude is asked to suggest compacting before long work. Must be above contextCompact and at most 100; out of order, all four use their defaults.",
+      "default": 75,
+      "min": 1,
+      "max": 100
+    }
+  }
+}
